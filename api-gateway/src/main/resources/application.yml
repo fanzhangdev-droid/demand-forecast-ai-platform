@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: api-gateway
+
+  datasource:
+    # ローカル PostgreSQL への接続設定
+    # 環境変数が設定されている場合はそちらを優先する
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/demand_forecast}
+    username: ${SPRING_DATASOURCE_USERNAME:zhangfan}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      # update: アプリ起動時にエンティティ定義に合わせてテーブルを自動作成・更新する
+      # 本番環境では migrate（Flyway 等）に切り替えること
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        # SQL をインデントして読みやすく表示する
+        format_sql: true
+
+server:
+  port: ${API_GATEWAY_PORT:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+
+ml:
+  service:
+    # ML サービス（FastAPI）のベース URL。環境変数 ML_SERVICE_URL で上書き可能。
+    base-url: ${ML_SERVICE_URL:http://localhost:8000}

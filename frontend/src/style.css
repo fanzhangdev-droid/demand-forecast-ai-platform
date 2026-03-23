@@ -1,0 +1,322 @@
+/* ── リセットと基本設定 ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  background-color: #f5f6fa;
+  color: #333;
+}
+
+/* ── ページ全体のレイアウト ── */
+.container {
+  max-width: 860px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #1a1a2e;
+}
+
+/* ── ページ全体の簡易説明 ── */
+/* h1 の直下に置くことで「タイトルの補足」として自然に読まれる */
+.page-description {
+  margin-top: -16px;
+  margin-bottom: 24px;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.7;
+}
+
+/* ── セクション内の補足説明 ── */
+/* h2 の直下に小さめのテキストを置くことで「セクションの目的」を即座に伝える */
+.section-description {
+  margin-top: -12px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  color: #888;
+  line-height: 1.6;
+}
+
+/* ── カードコンポーネント（フォームと履歴の共通枠） ── */
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 28px 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.card h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e8eaf0;
+  color: #1a1a2e;
+}
+
+/* ── フォーム ── */
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.form-row label {
+  width: 150px;
+  flex-shrink: 0;
+  font-weight: 500;
+  color: #555;
+}
+
+.form-row input,
+.form-row select {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #d0d5e0;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.form-row input:focus,
+.form-row select:focus {
+  border-color: #4a6cf7;
+}
+
+button[type='submit'] {
+  margin-top: 8px;
+  padding: 10px 28px;
+  background-color: #4a6cf7;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+button[type='submit']:hover:not(:disabled) {
+  background-color: #3a5ce5;
+}
+
+button[type='submit']:disabled {
+  background-color: #a0aec0;
+  cursor: not-allowed;
+}
+
+/* ── 予測結果 ── */
+.result {
+  margin-top: 20px;
+  padding: 16px 20px;
+  background-color: #eef2ff;
+  border-left: 4px solid #4a6cf7;
+  border-radius: 6px;
+}
+
+.result-label {
+  font-weight: 600;
+  color: #444;
+}
+
+.result-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #4a6cf7;
+  margin-left: 8px;
+}
+
+/* ── ステータスメッセージ（送信中） ── */
+.status-message {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background-color: #f0f4ff;
+  border-left: 4px solid #a0aec0;
+  border-radius: 6px;
+  color: #555;
+  font-size: 14px;
+}
+
+/* ── 成功メッセージ ── */
+.success-message {
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: #2f855a;
+}
+
+/* ── 結果数値の文脈説明 ── */
+/* 数値だけでは意味が分からないため、何の結果かを一言添える */
+.result-context {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+/* ── 予測結果の数値行 ── */
+.result-number {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+/* ── エラーメッセージ ── */
+.error {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background-color: #fff0f0;
+  border-left: 4px solid #e53e3e;
+  border-radius: 6px;
+  color: #c53030;
+  font-size: 14px;
+  white-space: pre-line;  /* 複数エラーを改行で表示する */
+}
+
+/* ── 履歴絞り込みフォーム ── */
+/* 横並びのコンパクトな検索バーとして実装。テーブルの直上に置くことで関連性を示す。 */
+.filter-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.filter-form select,
+.filter-form input[type='date'] {
+  padding: 7px 10px;
+  border: 1px solid #d0d5e0;
+  border-radius: 6px;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.filter-form select:focus,
+.filter-form input[type='date']:focus {
+  border-color: #4a6cf7;
+}
+
+/* Search ボタンはメインボタンと同系統の色。Reset は控えめなスタイル。 */
+.filter-form button[type='submit'] {
+  padding: 7px 18px;
+  background-color: #4a6cf7;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s;
+  margin-top: 0;
+}
+
+.filter-form button[type='submit']:hover {
+  background-color: #3a5ce5;
+}
+
+.filter-form button[type='button'] {
+  padding: 7px 14px;
+  background-color: transparent;
+  color: #666;
+  border: 1px solid #d0d5e0;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.filter-form button[type='button']:hover {
+  background-color: #f0f2f8;
+}
+
+/* ── 履歴テーブル ── */
+.empty {
+  color: #888;
+  font-size: 14px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+thead tr {
+  background-color: #f0f2f8;
+}
+
+th {
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+  color: #555;
+  white-space: nowrap;
+}
+
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* 行にホバーで薄いハイライトをつける */
+tbody tr:hover {
+  background-color: #f7f8fc;
+}
+
+/* ── ページネーションコントロール ── */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+  font-size: 14px;
+  color: #555;
+}
+
+.pagination button {
+  padding: 6px 16px;
+  background-color: transparent;
+  color: #4a6cf7;
+  border: 1px solid #4a6cf7;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #4a6cf7;
+  color: #fff;
+}
+
+.pagination button:disabled {
+  color: #c0c4d0;
+  border-color: #e0e3ed;
+  cursor: not-allowed;
+}
